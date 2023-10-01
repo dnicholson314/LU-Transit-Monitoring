@@ -1,7 +1,5 @@
 import requests
 from arrival import Arrival
-from time import sleep
-from os import system
 
 # Hardcoded to all API requests, will fail if not included
 API_KEY = 8882812681
