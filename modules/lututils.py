@@ -19,6 +19,8 @@ def get_routes() -> dict[str, int]:
     for item in payload:
         name = item["Description"]
         id = item["RouteID"]
+
+        # Filter out the one route that doesn't have any vehicles.
         if "Not in Service" in name:
             continue
         
@@ -60,10 +62,12 @@ def get_arrivals(vehicle_ids = get_vehicle_ids()):
         vehicle_id = item["Times"][0]["VehicleId"]
         seconds = item["Times"][0]["Seconds"]
         stop = item["StopDescription"]
+
+        # The API returns some estimates that aren't connected to a vehicle;
+        # here, we filter those estimates out.
         if vehicle_id == None:
             continue
 
         arrivals.append(Arrival(route_id, vehicle_id, stop, seconds))
 
     return arrivals
-
