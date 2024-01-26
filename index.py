@@ -1,10 +1,11 @@
-import modules.lututils as lut
+import lututils as lut
+import os, time
 
 routes = lut.get_routes()
 
 while True:
     arrivals = lut.get_arrivals()
-    lut.system("cls")
+    os.system("cls")
     for arrival in arrivals:
         print(f"{routes[arrival.route_id]} @ {arrival.stop} ({arrival.get_mins()} mins)")
-    lut.sleep(2)
+    time.sleep(2)
