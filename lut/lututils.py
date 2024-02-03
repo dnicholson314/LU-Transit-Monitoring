@@ -1,5 +1,5 @@
 import requests
-from arrival import Arrival
+from ._arrival import Arrival
 
 # Hardcoded to all API requests, will fail if not included
 API_KEY = 8882812681
@@ -26,7 +26,7 @@ def get_routes() -> dict[str, int]:
 
     return routes
 
-def get_vehicle_ids(as_str = True):
+def get_vehicle_ids() -> list[int]:
     url = "https://liberty.ridesystems.net/Services/JSONPRelay.svc/GetMapVehiclePoints"
     params = {
         "apiKey": API_KEY, 
@@ -37,8 +37,6 @@ def get_vehicle_ids(as_str = True):
 
     for item in payload:
         id = item["VehicleID"]
-        if as_str:
-            id = str(id)
         vehicle_ids.append(id)
 
     return vehicle_ids
